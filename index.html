@@ -1,1 +1,599 @@
-"Ya did it Joy"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Machine Learning Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #3a3a3a;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b4513;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3a3a3a;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a:hover {
+            color: #8b4513;
+            background: rgba(139, 69, 19, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(45deg, #8b4513, #cd853f);
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, #ddd, #f0f0f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #8b4513;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .current-work {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .work-card h3 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .work-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .work-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Content Pages */
+        .content-page {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content-page h2 {
+            color: #8b4513;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            border-left: 4px solid #cd853f;
+        }
+
+        .content-section h3 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .publication-item, .project-item, .blog-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .publication-item:hover, .project-item:hover, .blog-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-title {
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .skill-category h4 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #cd853f, #daa520);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+                font-size: 2rem;
+            }
+
+            .current-work {
+                grid-template-columns: 1fr;
+            }
+
+            .content-page {
+                padding: 2rem 1rem;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: #666;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Your Name</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('cv')">CV</a></li>
+                <li><a href="#" onclick="showPage('publications')">Publications</a></li>
+                <li><a href="#" onclick="showPage('projects')">Projects</a></li>
+                <li><a href="#" onclick="showPage('blog')">Blog</a></li>
+                <li><a href="#" onclick="showPage('interests')">Interests</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <div class="hero">
+                    <div class="profile-photo" onclick="document.getElementById('photoInput').click()">
+                        📸
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="loadPhoto(event)">
+                    <h1>Your Name</h1>
+                    <p>Machine Learning Engineer</p>
+                    <p>Passionate about AI, innovation, and creating intelligent solutions that make a difference.</p>
+                </div>
+
+                <div class="current-work">
+                    <div class="work-card">
+                        <div class="work-icon">🤖</div>
+                        <h3>Financial Assistant Agent</h3>
+                        <p>Building an intelligent financial assistant that leverages advanced machine learning algorithms to provide personalized financial advice and automated portfolio management.</p>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-icon">❤️</div>
+                        <h3>Affective Computing</h3>
+                        <p>Exploring the intersection of human emotions and artificial intelligence, developing systems that can recognize, interpret, and respond to human emotional states.</p>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-icon">🧘</div>
+                        <h3>Meditation & Mindfulness</h3>
+                        <p>Researching the application of AI in meditation practices and mindfulness training, creating tools that enhance mental well-being through technology.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CV Page -->
+            <div id="cv" class="page">
+                <div class="content-page">
+                    <h2>Curriculum Vitae</h2>
+                    
+                    <div class="content-section">
+                        <h3>Education</h3>
+                        <p><strong>Ph.D. in Machine Learning</strong> - University Name (Year - Year)</p>
+                        <p>Dissertation: "Advanced Neural Networks for Predictive Analytics"</p>
+                        <p><strong>M.S. in Computer Science</strong> - University Name (Year - Year)</p>
+                        <p><strong>B.S. in Mathematics</strong> - University Name (Year - Year)</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h3>Experience</h3>
+                        <p><strong>Senior Machine Learning Engineer</strong> - Company Name (Year - Present)</p>
+                        <p>Lead development of ML models for financial forecasting and risk assessment.</p>
+                        <p><strong>Research Scientist</strong> - Research Institute (Year - Year)</p>
+                        <p>Conducted research in affective computing and human-computer interaction.</p>
+                    </div>
+
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming Languages</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">R</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">C++</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>ML Frameworks</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">Scikit-learn</span>
+                                <span class="skill-tag">Keras</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Tools & Technologies</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publications Page -->
+            <div id="publications" class="page">
+                <div class="content-page">
+                    <h2>Academic Publications</h2>
+                    
+                    <div class="publication-item">
+                        <div class="item-title">Advanced Neural Networks for Financial Prediction</div>
+                        <div class="item-meta">Journal of Machine Learning Research, 2024</div>
+                        <p>This paper presents a novel approach to financial forecasting using deep neural networks with attention mechanisms.</p>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="item-title">Affective Computing in Human-Computer Interaction</div>
+                        <div class="item-meta">ACM Transactions on Computer-Human Interaction, 2023</div>
+                        <p>A comprehensive study on emotion recognition systems and their applications in user interface design.</p>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="item-title">Meditation and AI: A Computational Approach to Mindfulness</div>
+                        <div class="item-meta">International Conference on AI and Wellness, 2023</div>
+                        <p>Exploring how artificial intelligence can enhance meditation practices and promote mental well-being.</p>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="item-title">Reinforcement Learning for Automated Trading Systems</div>
+                        <div class="item-meta">Journal of Financial Technology, 2022</div>
+                        <p>Implementation of reinforcement learning algorithms for optimizing trading strategies in volatile markets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Page -->
+            <div id="projects" class="page">
+                <div class="content-page">
+                    <h2>Projects</h2>
+                    
+                    <div class="project-item">
+                        <div class="item-title">FinanceBot - AI Financial Assistant</div>
+                        <div class="item-meta">Python, TensorFlow, React | 2024</div>
+                        <p>A comprehensive financial assistant that provides personalized investment advice, budget tracking, and market analysis using advanced machine learning algorithms.</p>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="item-title">EmotiCam - Emotion Recognition System</div>
+                        <div class="item-meta">Python, OpenCV, PyTorch | 2023</div>
+                        <p>Real-time emotion recognition system using computer vision and deep learning to analyze facial expressions and provide emotional feedback.</p>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="item-title">MindfulAI - Meditation Companion</div>
+                        <div class="item-meta">Flutter, Firebase, TensorFlow Lite | 2023</div>
+                        <p>Mobile application that uses AI to personalize meditation sessions based on user's stress levels and preferences.</p>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="item-title">Market Predictor - Stock Analysis Tool</div>
+                        <div class="item-meta">Python, Pandas, Scikit-learn | 2022</div>
+                        <p>Machine learning model for predicting stock price movements using technical indicators and sentiment analysis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Page -->
+            <div id="blog" class="page">
+                <div class="content-page">
+                    <h2>Blog</h2>
+                    
+                    <div class="blog-item">
+                        <div class="item-title">The Future of AI in Personal Finance</div>
+                        <div class="item-meta">Published: March 15, 2024</div>
+                        <p>Exploring how artificial intelligence is revolutionizing personal finance management and what the future holds for AI-powered financial services.</p>
+                    </div>
+
+                    <div class="blog-item">
+                        <div class="item-title">Understanding Affective Computing</div>
+                        <div class="item-meta">Published: February 8, 2024</div>
+                        <p>A deep dive into affective computing, its applications, and how machines can understand and respond to human emotions.</p>
+                    </div>
+
+                    <div class="blog-item">
+                        <div class="item-title">Meditation Meets Machine Learning</div>
+                        <div class="item-meta">Published: January 22, 2024</div>
+                        <p>How AI and machine learning are being integrated into meditation practices to enhance mindfulness and mental well-being.</p>
+                    </div>
+
+                    <div class="blog-item">
+                        <div class="item-title">Building Ethical AI Systems</div>
+                        <div class="item-meta">Published: December 10, 2023</div>
+                        <p>Discussing the importance of ethics in AI development and how to build responsible machine learning systems.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interests Page -->
+            <div id="interests" class="page">
+                <div class="content-page">
+                    <h2>Interests</h2>
+                    
+                    <div class="content-section">
+                        <h3>Technical Interests</h3>
+                        <p>Deep learning architectures, natural language processing, computer vision, reinforcement learning, and neural network optimization. I'm particularly fascinated by the intersection of AI and human psychology.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h3>Research Areas</h3>
+                        <p>Affective computing, financial technology, meditation technology, human-computer interaction, and ethical AI development. I believe in creating technology that enhances human well-being.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h3>Personal Interests</h3>
+                        <p>Meditation and mindfulness practices, reading about cognitive science, hiking in nature, photography, and exploring the philosophical implications of artificial intelligence.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h3>Hobbies</h3>
+                        <p>Playing chess, learning musical instruments, cooking international cuisines, and participating in hackathons and AI competitions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="container">
+                <p>&copy; 2024 Your Name. All rights reserved. | Connect with me on LinkedIn and GitHub</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function loadPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoDiv = document.querySelector('.profile-photo');
+                    photoDiv.innerHTML = `<img src="${e.target.result}" alt="Profile Photo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+
+        // Add some interactive animations
+        document.querySelectorAll('.work-card, .content-section, .publication-item, .project-item, .blog-item').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
